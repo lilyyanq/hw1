@@ -8,12 +8,12 @@ Create linked lists and split them with your split() function.
 You can compile this file like this:
 g++ split.cpp test_split.cpp -o test_split
 */
-#include<cstdlib>
 #include "split.h"
+#include<cstddef>
 
 void deleteList(Node* head)
 {
-  if(head != nullptr)
+  if(head != NULL)
   {
     Node* temp = head;
     head = head->next;
@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
   Node* current = NULL;
   for(int i = 0; i < argc; i++)
   {
-    int number = atoi(argv[i]);
-    Node* newNode = new Node(number, NULL);
+    char number = *argv[i];
+    Node* newNode = new Node(static_cast<int>(number), NULL);
     if(in == NULL)
     {
       in = newNode;
