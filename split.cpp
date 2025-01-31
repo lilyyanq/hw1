@@ -11,7 +11,7 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
-#include<cstdlib>
+#include<cstddef>
 
 void append(Node*& list, Node*& node);
 
