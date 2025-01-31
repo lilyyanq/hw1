@@ -13,7 +13,7 @@ the function below should be the only one in this file.
 #include "split.h"
 #include<cstdlib>
 
-/* Add a prototype for a helper function here if you need */
+void append(Node*& list, Node*& node);
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
@@ -23,19 +23,28 @@ void split(Node*& in, Node*& odds, Node*& evens)
   {
     return;
   }
-  Node* curr = in;
-  in = in->next; //the next value
+  Node* curr = in; //the next value
+  in = in->next; //disconnect
+  curr->next = NULL;
   if(curr->value % 2 == 0) //even number
   {
-    curr->next = evens; //move to evens list
-    evens = curr;
+    append(evens, curr);
   }
-  if(curr->value % 2 == 1)//odd number
+  else//odd number
   {
-    curr->next = odds;
-    odds = curr;
+    append(odds, curr);
   }
   split(in, odds, evens);//recursive call
 }
 
 /* If you needed a helper function, write it here */
+void append(Node*& list, Node*& node)
+{
+  if(list == NULL||list->value >= node->value)
+  {
+    node->next = list;
+    list = node;
+    return;
+  }
+  append(list->next, node);
+}
